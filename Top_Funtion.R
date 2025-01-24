@@ -1,17 +1,5 @@
 # Top-Level Function
 def simulate_game_state(down, yards_to_go, field_position, num_epochs=100):
-    """
-    Simulates the game state and computes the expected points from a given state.
-
-    Parameters:
-        down (int): Current down (1-4).
-        yards_to_go (int): Yards to go for a first down or touchdown.
-        field_position (int): Current field position (0-100).
-        num_epochs (int): Number of epochs to simulate.
-
-    Returns:
-        float: Expected points from the given state.
-    """
     results = []
     for _ in range(num_epochs):
         score = simulate_epoch(down, yards_to_go, field_position)
@@ -20,17 +8,6 @@ def simulate_game_state(down, yards_to_go, field_position, num_epochs=100):
 
 # Epoch Function
 def simulate_epoch(down, yards_to_go, field_position):
-    """
-    Simulates a single epoch of the game from the given state.
-
-    Parameters:
-        down (int): Current down.
-        yards_to_go (int): Yards to go for a first down or touchdown.
-        field_position (int): Current field position.
-
-    Returns:
-        int: Score for the epoch.
-    """
     team_possession = 1  # 1 for "our team", -1 for opponent
     max_drives = 10
     for _ in range(max_drives):
@@ -42,17 +19,7 @@ def simulate_epoch(down, yards_to_go, field_position):
 
 # Drive Function
 def simulate_drive(down, yards_to_go, field_position):
-    """
-    Simulates a single drive and returns the new state.
 
-    Parameters:
-        down (int): Current down.
-        yards_to_go (int): Yards to go for a first down or touchdown.
-        field_position (int): Current field position.
-
-    Returns:
-        tuple: (down, yards_to_go, field_position)
-    """
     # For simplicity, randomly adjust the field position
     import random
     new_field_position = field_position + random.randint(-10, 40)
@@ -61,12 +28,10 @@ def simulate_drive(down, yards_to_go, field_position):
 
 # Helper Functions
 def is_score(state):
-    """Determines if a score has occurred based on the field position."""
     _, _, field_position = state
     return field_position > 100
 
 def get_score(state):
-    """Returns the score based on the field position."""
     _, _, field_position = state
     if 100 < field_position <= 110:
         return 7  # Touchdown
