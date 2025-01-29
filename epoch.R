@@ -10,5 +10,5 @@ epoch <- function(down, ytg, fp) {
     }
     team_possession <- team_possession * -1  # Switch possession
   } 
-  return(0)
+  0
 }
