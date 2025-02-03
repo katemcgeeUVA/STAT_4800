@@ -7,5 +7,4 @@ compute_score <- function(fp){
   } else {
     3
   }
-
 }
