@@ -57,8 +57,11 @@ for (i in 1:count) {
 }
 
 # Normalize counts to get proportions
-steady_state <- coin_counts / sum(coin_counts)
+#steady_state <- coin_counts / sum(coin_counts)
 
-# Print final rankings
-ranking <- sort(steady_state, decreasing = TRUE)
-ranking
+# Rankings
+#ranking <- sort(steady_state, decreasing = TRUE)
+#final_rank <- rank(-ranking, ties.method = "first")
+
+#ranking
+#final_rank
