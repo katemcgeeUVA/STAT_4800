@@ -17,12 +17,12 @@ run_play <- function(down, ytg, fp){
 down_one <- function(down, ytg, fp){
   # simulate the first down
   ytg_new <- sample(0:5, 1)  # yards gained on first down
-  ytg <- max(ytg - ytg_new, 0)  # update YTG
+  ytg <- max(ytg - ytg_new, 0)  # update ytg
   
   # continue or finish the drive
-  exit_drive <- ifelse(ytg == 0, 0, 1)  # 1st down ends if YTG = 0
+  exit_drive <- ifelse(ytg == 0, 0, 1)  # 1st down ends if ytg = 0
   
-  # update FP and return new state
+  # update fp and return new state
   fp_new <- fp + ytg_new
   list(down=down, ytg=ytg, fp=fp_new, exit_drive=exit_drive)
 }
@@ -30,25 +30,25 @@ down_one <- function(down, ytg, fp){
 down_two <- function(down, ytg, fp){
   # simulate the second down
   ytg_new <- sample(0:6, 1)  # yards gained on second down
-  ytg <- max(ytg - ytg_new, 0)  # update YTG
+  ytg <- max(ytg - ytg_new, 0)  # update ytg
   
   # continue or finish the drive
   exit_drive <- ifelse(ytg == 0, 0, 1)
   
-  # update FP and return new state
-  fp_new <- fp + ytp_new
+  # update fp and return new state
+  fp_new <- fp + ytg_new
   list(down=down, ytg=ytg, fp=fp_new, exit_drive=exit_drive)
 }
 
 down_three <- function(down, ytg, fp){
   # simulate the third down
   ytg_new <- sample(0:7, 1)  # yards gained on third down
-  ytg <- max(ytg - ytg_new, 0)  # update YTG
+  ytg <- max(ytg - ytg_new, 0)  # update ytg
   
   # continue or finish the drive
   exit_drive <- ifelse(ytg == 0, 0, 1)
   
-  # update FP and return new state
+  # update fp and return new state
   fp_new <- fp + ytg_new
   list(down=down, ytg=ytg, fp=fp_new, exit_drive=exit_drive)
 }
@@ -61,7 +61,7 @@ down_four <- function(down, ytg, fp){
     # simulate a field goal attempt
     field_goal_success <- run_field_goal(fp)
     if(field_goal_success) {
-      # if successful, return state with FP set to 115 (score)
+      # if successful, return state with fp set to 115 (score)
       list(down=1, ytg=10, fp=115, exit_drive=1)
     } else {
       # if failed, switch possession
@@ -75,7 +75,7 @@ down_four <- function(down, ytg, fp){
     # simulate "go for it" on 4th down
     go_for_it_success <- sample(c(TRUE, FALSE), 1)
     if(go_for_it_success) {
-      # if successful, continue the drive with new FP
+      # if successful, continue the drive with new fp
       fp_new <- fp + sample(1:10, 1)  # random yards gained
       list(down=1, ytg=10, fp=fp_new, exit_drive=0)
     } else {
@@ -86,7 +86,7 @@ down_four <- function(down, ytg, fp){
 }
 
 run_field_goal <- function(fp) {
-  # simulate field goal success/failure based on FP
+  # simulate field goal success/failure based on fp
   field_goal_probability <- ifelse(fp > 80, 0.5, 0.8)  # higher success rate closer to end zone
   runif(1) < field_goal_probability
 }
