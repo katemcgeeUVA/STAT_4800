@@ -17,6 +17,6 @@ run_drive <- function(down, ytg, fp){
   } else {
     
     # otherwise, return the current state to the run_epoch function
-    list(down=new_state$down, YTG=new_state$ytg, fp=new_state$fp)
+    list(down=new_state$down, ytg=new_state$ytg, fp=new_state$fp)
   }
 }
