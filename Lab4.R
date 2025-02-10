@@ -4,28 +4,24 @@
 source("run_play.R")
 
 pbpdata <- readRDS("~/Desktop/Stat/pbp2014-2024.rds")
-#head(pbpdata)
 
 run_drive <- function(down, ytg, fp){
   
-  # initialize the flag for continuing the drive
-  continue_drive <- 0
+  # get new state
+  new_state <- run_play(down, ytg, fp)
   
-  # while there are still downs to play, continue running the drive
-  while(continue_drive == 0){
-    # run a single play
-    new_state <- run_play(down, ytg, fp)
+  # Check if we should return the state or run a new play
+  if(new_state$exit_drive==0){
     
-    # check if we should continue or switch possession
-    continue_drive <- new_state$exit_drive
+    # if we should stay with the current drive, simply call it again with the
+    # new state
+    run_drive(new_state$down, new_state$ytg, new_state$fp)
     
-    # if the drive is continuing, update the state and continue
-    down <- new_state$down
-    ytg <- new_state$ytg
-    fp <- new_state$fp
+  } else {
+    
+    # otherwise, return the current state to the run_epoch function
+    list(down=new_state$down, YTG=new_state$ytg, fp=new_state$fp)
   }
-  
-list(down=down, ytp=ytg, fp=fp)
 }
 
 
