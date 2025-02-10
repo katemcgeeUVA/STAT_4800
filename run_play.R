@@ -14,7 +14,7 @@ run_play <- function(down, ytg, fp){
   }
 }
 
-down_one <- function(down, ytp, fp){
+down_one <- function(down, ytg, fp){
   # simulate the first down
   ytg_new <- sample(0:5, 1)  # yards gained on first down
   ytg <- max(ytg - ytg_new, 0)  # update YTG
