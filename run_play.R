@@ -1,6 +1,5 @@
 # 2 
 ```{r}
-# run_play.R
 
 run_play <- function(down, ytg, fp){
   # Randomly select the down (1st, 2nd, 3rd, or 4th)
