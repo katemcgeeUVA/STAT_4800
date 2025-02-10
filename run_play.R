@@ -1,6 +1,3 @@
-# 2 
-```{r}
-
 run_play <- function(down, ytg, fp){
   # Randomly select the down (1st, 2nd, 3rd, or 4th)
   down <- sample(1:4, 1)
@@ -93,6 +90,3 @@ run_field_goal <- function(fp) {
   field_goal_probability <- ifelse(fp > 80, 0.5, 0.8)  # higher success rate closer to end zone
   runif(1) < field_goal_probability
 }
-
-```
-
