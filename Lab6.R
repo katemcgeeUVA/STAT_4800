@@ -14,7 +14,7 @@ nhl_data <- nhl_data %>%
          PointDiff = as.numeric(PointDiff))  
 
 # Poisson Regression Model
-shot_rate_model1 <- glm(Shot ~ PeriodTimeBlock + PointDiff, data = nhl_data, family = poisson)
+shot_rate_model1 <- glm(Event ~ PeriodTimeBlock + PointDiff, data = nhl_data, family = poisson)
 
 summary(shot_rate_model1)
 
