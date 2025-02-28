@@ -1,12 +1,16 @@
+
 library(dplyr)
 library(ggplot2)
+library(readr)
 
-file_path <- "nhl_pbp20162017.csv"
-nhl_data <- read.csv(file_path)
+
+nhl_data <- read.csv("~/Desktop/Sports/nhl_pbp20162017.csv")
 
 #Shot Rate Model (Time + Point Differential)
 nhl_data <- nhl_data %>%
-  mutate(PeriodTimeBlock = cut(Time, breaks = c(0, 400, 800, 1200), labels = c("Early", "Mid", "Late"), include.lowest = TRUE),
+  mutate(PointDiff = Home_Score - Away_Score)
+nhl_data <- nhl_data %>%
+  mutate(PeriodTimeBlock = cut(Seconds_Elapsed, breaks = c(0, 400, 800, 1200), labels = c("Early", "Mid", "Late"), include.lowest = TRUE),
          PointDiff = as.numeric(PointDiff))  
 
 # Poisson Regression Model
