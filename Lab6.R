@@ -1,4 +1,3 @@
-
 library(dplyr)
 library(ggplot2)
 library(readr)
@@ -14,7 +13,9 @@ nhl_data <- nhl_data %>%
          PointDiff = as.numeric(PointDiff))  
 
 # Poisson Regression Model
-shot_rate_model1 <- glm(Event ~ PeriodTimeBlock + PointDiff, data = nhl_data, family = poisson)
+nhl_data <- nhl_data %>%
+  mutate(ShotCount = ifelse(Event == "Shot", 1, 0))
+shot_rate_model1 <- glm(ShotCount ~ PeriodTimeBlock + PointDiff, data = nhl_data, family = poisson)
 
 summary(shot_rate_model1)
 
@@ -30,16 +31,13 @@ nhl_data <- nhl_data %>%
   ))
 
 # Poisson Regression 
-shot_rate_model2 <- glm(Shot ~ Region, data = nhl_data, family = poisson)
+shot_rate_model2 <- glm(ShotCount ~ Region, data = nhl_data, family = poisson)
 
 summary(shot_rate_model2)
 
 
-#Shot Success Rate Model
-nhl_data <- nhl_data %>%
-  mutate(Success = ifelse(ShotResult == "ON GOAL", 1, 0))
 
 # Logistic Regression
-shot_success_model <- glm(Success ~ xC + yC, data = nhl_data, family = binomial)
+shot_success_model <- glm(ShotCount ~ xC + yC, data = nhl_data, family = binomial)
 
 summary(shot_success_model)
