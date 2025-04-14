@@ -6,9 +6,7 @@ run_epoch <- function(down, ytg, fp) {
   max_drives <- 10 
   cumulative_drives <- 0 
   no_score <- TRUE 
-  
-  print("Remember, the state of the first drive should be the input state.")
-  
+    
   while(no_score & (cumulative_drives < max_drives)) {
     team_status <- team_status * -1
     cumulative_drives <- cumulative_drives + 1
